@@ -1,5 +1,28 @@
-.container {
+.maincontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.unitcontainer {
+
     display: grid;
-    grid-template-columns: repeat(16, 5vw);
-    grid-template-rows: repeat(16, 5vh);
+    grid-template-columns: repeat(16, 40px);
+    grid-template-rows: repeat(16, 40px);
+    border-style:dotted;
+}
+
+.unit {
+    border-style: none;
+}
+
+.active {
+    background-color: grey;
+}
+
+#gen {
+    width: 10vw;
+    margin: 15px;
 }

@@ -5,26 +5,64 @@
     <link href="styles.css" rel="stylesheet">
 </head>
 
-<body onload="createGrid()">
-    <div class="container">
+<body>
 
+    
 
+    <div class="maincontainer">
+        <button id="gen" onclick="resetButton()">Click to generate</button>
+        <div class="unitcontainer">
+            <!--Units go here-->
+        </div>
     </div>
 
     
 </body>
-<script>
-    function createGrid() {
-        const container = document.querySelector(".container");
-        const size = 16;
+<script>        
 
-        for (let i = 0; i < size*size; i++) {
-            let div = document.createElement("div");
-            div.innerText = i;
+    const container = document.querySelector(".unitcontainer");
 
-            container.appendChild(div);
-            
+    function resetButton() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        newSize = prompt("power of: ", 16);
+        if (newSize > 100) {
+            alert("size too large. using 100");
+            newSize = 100;
         }
+
+        let pixels;
+        if(height < width) {
+            pixels = height*0.8;
+        } else {
+            pixels = width*0.8;
+        }
+        pixels = pixels / newSize;
+
+        clear();
+        createGrid(newSize, pixels);
+
+    }
+
+    function createGrid(size, pixels) {
+        container.style.gridTemplateRows=`repeat(${size}, ${pixels}px)`;
+        container.style.gridTemplateColumns=`repeat(${size}, ${pixels}px)`;
+        for (let i = 0; i < size*size; i++) {
+            let unit = document.createElement("div");
+            unit.classList.add("unit");
+            //unit.innerText = i;
+
+            unit.addEventListener("mouseover", (e) => {
+                e.target.classList.add("active");
+            });
+
+            container.appendChild(unit);            
+        }
+    }
+
+    function clear() {
+        container.innerHTML = "";
     }
 
 
